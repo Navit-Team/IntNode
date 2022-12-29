@@ -21,7 +21,11 @@ namespace IntNode_and_stuff
         // פעולה שמחזירה את ערכי המחלקה
         public override string ToString()
         {
-            return $"{this.Value}";
+            if (!this.HasNext())
+                return $"{this.Value}";
+            return $"{this.Value} -> {this.Next}"; 
+
+
         }
     }
 

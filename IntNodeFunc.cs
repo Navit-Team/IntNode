@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace IntNode_and_stuff
 {
     internal class IntNodeFunc : IntNode
     {
         public IntNodeFunc(int value, IntNode next) : base(value, next) { }
+        public IntNodeFunc(int value) : base(value) { }
 
         // פעולה שמקבלת רשימה ומחזירה את מספר האברים בה 
         public int Count(IntNode n)
@@ -87,13 +83,27 @@ namespace IntNode_and_stuff
                 if (count % 2 == 0)
                     Console.Write(n.Value + " ");
                 n = n.Next;
-                count++; 
+                count++;
             }
-        }
 
         }
 
+        public void DeleteValue(IntNode n, int i)
+        {
+            int counter = 0;
+            IntNode prev = null; 
+            while (n.HasNext() && counter < i)
+            {
+                counter++;
+                prev = n;
+                n = n.Next; 
+            }
+            prev.Next = n.Next;
 
+        }
 
     }
+
+
+
 }

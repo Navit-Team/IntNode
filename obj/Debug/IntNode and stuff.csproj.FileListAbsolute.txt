@@ -1,0 +1,8 @@
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\bin\Debug\IntNode and stuff.exe.config
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\bin\Debug\IntNode and stuff.exe
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\bin\Debug\IntNode and stuff.pdb
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\obj\Debug\IntNode and stuff.csproj.AssemblyReference.cache
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\obj\Debug\IntNode and stuff.csproj.SuggestedBindingRedirects.cache
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\obj\Debug\IntNode and stuff.csproj.CoreCompileInputs.cache
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\obj\Debug\IntNode and stuff.exe
+C:\Users\bratt\source\repos\IntNode and stuff\IntNode and stuff\obj\Debug\IntNode and stuff.pdb

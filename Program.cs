@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,12 @@ namespace IntNode_and_stuff
 
         static void Main(string[] args)
         {
+            IntNodeFunc a = new IntNodeFunc(1);
+            IntNodeFunc b = new IntNodeFunc(3, a);
+            IntNodeFunc n = new IntNodeFunc(5, b);
+
+            n.DeleteValue(n, 0);
+            Console.WriteLine(n.ToString());
         }
     }
 }
