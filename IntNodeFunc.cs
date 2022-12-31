@@ -1,109 +1,185 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace IntNode_and_stuff
 {
     internal class IntNodeFunc : IntNode
     {
-        public IntNodeFunc(int value, IntNode next) : base(value, next) { }
-        public IntNodeFunc(int value) : base(value) { }
+        public IntNodeFunc(int value, IntNode next = null) : base(value, next) { }
 
         // פעולה שמקבלת רשימה ומחזירה את מספר האברים בה 
-        public int Count(IntNode n)
+        public int GetLength()
         {
+            IntNode node = this;
             int count = 0;
-            while (n != null)
+            while (node != null)
             {
                 count++;
-                n = n.Next;
+                node = node.Next;
             }
             return count;
         }
-        // פעולה שמקבלת רשימה ומחזירה את סכום האיברים ברשימה
 
-        public int SumCount(IntNode n)
+        // פעולה שמקבלת רשימה ומחזירה את סכום האיברים ברשימה
+        public int GetSum()
         {
+            IntNode node = this;
             int sum = 0;
-            while (n != null)
+            while (node != null)
             {
-                sum += n.Value;
-                n = n.Next;
+                sum += node.Value;
+                node = node.Next;
             }
             return sum;
         }
-        // פעולה שמחזירה את ממוצע איברי המחלקה
-        public int Average(IntNode n)
+
+        // פעולה שמחזירה את ממוצע איברי הרשימה
+        public int GetAverage()
         {
-            return this.SumCount(n) / this.Count(n);
-        }
-        // פעולה שמחזירה איבר מקסימלי במערך
-        public IntNode GetMax(IntNode n)
-        {
-            IntNode max = new IntNode(int.MinValue, null);
-            while (n != null)
+            IntNode node = this;
+            int sum = 0;
+            int count = 0;
+            while (node != null)
             {
-                if (max.Value < n.Value)
-                    max.Value = Value;
-                n = n.Next;
+                sum += node.Value;
+                count++;
+                node = node.Next;
+            }
+            return sum / count;
+        }
+
+        // פעולה שמחזירה איבר מקסימלי במערך
+        public int GetMax()
+        {
+            IntNode node = this;
+            int max = int.MinValue;
+            while (node != null)
+            {
+                if (node.Value > max)
+                {
+                    max = node.Value;
+                }
+                node = node.Next;
             }
             return max;
         }
+
         // פעולה שמחזירה את הערך של המספר המינימלי במערך 
-        public int GetMinValue(IntNode n)
+        public int GetMin()
         {
+            IntNode node = this;
             int min = int.MaxValue;
-            while (n != null)
+            while (node != null)
             {
-                if (min > n.Value)
-                    min = n.Value;
-                n = n.Next;
+                if (node.Value < min)
+                {
+                    min = node.Value;
+                }
+                node = node.Next;
             }
             return min;
         }
-        // פעולה שמקבלת אינדקס ומחזירה ערך במקום שלו במידה ואין מחזיר -1 
-        public int ValueByIndex(IntNode n, int indx)
+
+        // פעולה שמקבלת אינדקס ומחזירה ערך במקום שלו במידה ואין מחזיר נאל
+        public int? GetFromIndex(int index)
         {
+            if (index < 0)
+                return null;
+
+            IntNode node = this;
             int count = 0;
-            while (n != null)
+            while (node != null)
             {
-                if (count == indx)
-                    return n.Value;
-                n = n.Next;
+                if (count == index)
+                    return node.Value;
                 count++;
+                node = node.Next;
             }
-            return -1;
+            return null;
         }
+
         // פעולה שמדפיסה את כל הערכים הזוגיים של המערך
-        public void PrintEvenValues(IntNode n)
+        public void PrintEvens()
         {
-            int count = 0;
-            while (n != null)
+            IntNode node = this;
+            string str = "";
+            while (node != null)
             {
-                if (count % 2 == 0)
-                    Console.Write(n.Value + " ");
-                n = n.Next;
+                if (node.Value % 2 == 0)
+                    str += node.Value + ", ";
+                node = node.Next;
+            }
+            Console.WriteLine(str.Remove(str.Length - 3));
+        }
+
+        // פעולה שמוחקת חולייה לפי מיקום ברשימה
+        public void RemoveByIndex(int index)
+        {
+            if (index <= 0)
+                return;
+
+            IntNode node = this;
+            int count = 0;
+            while (node.Next != null)
+            {
+                if (index - 1 == count)
+                {
+                    node.Next = node.Next.Next;
+                    return;
+                }
+                node = node.Next;
                 count++;
             }
-
         }
 
-        public void DeleteValue(IntNode n, int i)
+
+        //          // תרגילים מהספר //
+
+
+        // פעולה שבודקת מהוא מספר הרצפים ברשימה
+        public int Ex2(int num)
         {
-            int counter = 0;
-            IntNode prev = null; 
-            while (n.HasNext() && counter < i)
+            IntNode node = this;
+            int count = 0;
+            bool equals, prvEquals = false;
+            while (node != null)
             {
-                counter++;
-                prev = n;
-                n = n.Next; 
+                equals = num == node.Value;
+                if (equals && !prvEquals)
+                    count++;
+                prvEquals = equals;
+                node = node.Next;
             }
-            prev.Next = n.Next;
-
+            return count;
         }
 
+        // פעולה שבודקת אם הרשימה מסודרת בסדר עולה
+        public bool Ex3()
+        {
+            IntNode node = this;
+            int prvNum;
+            while (node.Next != null)
+            {
+                prvNum = node.Value;
+                node = node.Next;
+                if (prvNum > node.Value)
+                    return false;
+            }
+            return true;
+        }
+
+        public char Ex4()
+        {
+            IntNode node = this;
+            int[] count = { 0, 0 };// [0] -> Even  [1] -> Odd
+            while (node.Next != null)
+            {
+                if (node.Value % 2 == 0)
+                    count[0]++;
+                else
+                    count[1]++;
+                node = node.Next;
+            }
+            return count[0] == count[1] ? 's' : (count[0] > count[1] ? 'z' : 'e');
+        }
     }
-
-
-
 }
